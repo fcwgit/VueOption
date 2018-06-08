@@ -108,6 +108,52 @@ components:{
 <button onclick="vm.add(7)">add</button>
 
 
+===================watch    =======================
+<p>今日温度：{{num}}</p>
+        <p><button @click="shenggao">升高</button></p>
+        <p><button @click="jiangdi">降低</button></p>
+        <p>穿衣建议：{{chuanyi}}</p>
+
+watch监控num的变化
+data:{
+                message:'test',
+                num:1,
+                chuanyi:'夹克长裙'
+            },
+            methods:{
+                shenggao:function(){
+                    this.num+=5;
+                },
+                jiangdi:function(){
+                    this.num-=5;
+                }   
+            },
+            watch:{
+                  num:function(newVal,oldVal){
+                      if(newVal >= 26){
+                          this.chuanyi = 'T恤短袖';
+                      }else if(newVal <26 && newVal>=0 ){
+                          this.chuanyi = '夹克长裙'
+                      }else{
+                          this.chuanyi = '棉衣羽绒服';
+                      }
+                  }
+            }
+
+也可以在构造器外面进行监听
+vm.$watch('num',function(newVal,oldVal){
+            if(newVal >= 26){
+                this.chuanyi = 'T恤短袖';
+            }else if(newVal <26 && newVal>=0 ){
+                this.chuanyi = '夹克长裙'
+            }else{
+                this.chuanyi = '棉衣羽绒服';
+            }
+        });
+
+
+
+
 
 
 
