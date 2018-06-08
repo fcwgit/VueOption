@@ -31,3 +31,33 @@ template:`<p>{{message}}  --  {{a}}</p>`,
 
         new header_a({propsData:{a:1}}).$mount('header');
 
+
+==========================================
+var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'test',
+                price:10
+            },
+            computed:{
+                newPrice:function(){
+                    return '￥' + this.price + '元';
+                }
+            }
+        })
+
+在不污染原始数据的情况下，对选项值进行改造
+var newList = [
+            {title:'aaaa',date:'2017/3/24'},
+            {title:'bbbb',date:'2017/5/24'},
+            {title:'cccc',date:'2017/3/21'},
+            {title:'dddd',date:'2017/5/27'}
+        ]
+reverNews:function(){
+                    return this.newList.reverse();
+                }
+
+
+
+
+

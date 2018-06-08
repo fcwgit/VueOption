@@ -11,14 +11,33 @@
     <h3>test</h3>
     <hr>
     <div id="app">
-        {{message}}
+        <p>{{newPrice}}</p>
+        <ul>
+            <li v-for="items in reverNews">{{items.title}}  --  {{items.date}}</li>
+        </ul>
     </div>
 
     <script type="text/javascript">
+        var newList = [
+            {title:'aaaa',date:'2017/3/24'},
+            {title:'bbbb',date:'2017/5/24'},
+            {title:'cccc',date:'2017/3/21'},
+            {title:'dddd',date:'2017/5/27'}
+        ]
         var vm = new Vue({
             el:'#app',
             data:{
-                message:'test'
+                message:'test',
+                price:10,
+                newList:newList
+            },
+            computed:{
+                newPrice:function(){
+                    return '￥' + this.price + '元';
+                },
+                reverNews:function(){
+                    return this.newList.reverse();
+                }
             }
         })
     </script>
