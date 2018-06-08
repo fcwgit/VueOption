@@ -152,6 +152,61 @@ vm.$watch('num',function(newVal,oldVal){
         });
 
 
+===================mixins    =======================
+将构造器外部的对象混入构造器
+var addConsole = {
+            updated:function(){
+                console.log('数据发生变化，变成了' + this.num);
+            }
+        }
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'test',
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++;
+                }
+            },
+            mixins:[addConsole]
+        })
+
+原生的后执行、混入的先执行
+var addConsole = {
+            updated:function(){
+                console.log('数据发生变化，变成了' + this.num);
+            }
+        }
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'test',
+                num:1
+            },
+            updated:function(){
+                console.log('我是原生的updated');
+            },
+            methods:{
+                add:function(){
+                    this.num++;
+                }
+            },
+            mixins:[addConsole]
+        })
+全局API的混入方式
+全局的API都是使用Vue开头
+Vue.mixin({
+            updated:function(){
+                console.log('我是全局的混入API');
+            }
+        })
+
+执行的顺序如下：
+mixins.html:27 我是全局的混入API
+mixins.html:21 数据发生变化，变成了2
+mixins.html:38 我是原生的updated
 
 
 
