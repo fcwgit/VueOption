@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../assets/js/vue.js"></script>
+    <title>extends</title>
+</head>
+<body>
+    <h3>extends</h3>
+    <hr>
+    <div id="app">
+        <p>{{num}}</p>
+        <p>${num}</p>
+        <p><button @click="add">add</button></p>
+    </div>
+
+    <script type="text/javascript">
+        var extendsObj={
+            updated:function(){
+                console.log('我是扩展的updated');
+            },
+            methods:{
+                add:function(){
+                    console.log('我是扩展的add');
+                    return this.num++;
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'test',
+                num:1
+            },
+            methods:{
+                add:function(){
+                    console.log('我是原生的add');
+                    return this.num++;
+                }
+            },
+            updated:function(){
+                console.log('我是原生的updated' + this.num);
+            },
+            extends:extendsObj,
+            delimiters:['${','}']
+        })
+    </script>
+</body>
+</html>

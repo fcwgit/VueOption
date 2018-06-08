@@ -208,9 +208,47 @@ mixins.html:27 我是全局的混入API
 mixins.html:21 数据发生变化，变成了2
 mixins.html:38 我是原生的updated
 
+===================extends    =======================
+var extendsObj={
+            updated:function(){
+                console.log('我是扩展的updated');
+            },
+            methods:{
+                add:function(){
+                    console.log('我是扩展的add');
+                    return this.num++;
+                }
+            }
+        }
+var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'test',
+                num:1
+            },
+            methods:{
+                add:function(){
+                    console.log('我是原生的add');
+                    return this.num++;
+                }
+            },
+            updated:function(){
+                console.log('我是原生的updated' + this.num);
+            },
+            extends:extendsObj
+        })
+执行顺序
+我是原生的add
+extends.html:21 我是扩展的updated
+extends.html:44 我是原生的updated2
 
+注意：扩展只能放一个，不能放一个数组
+如果方法名冲突，那么扩展的方法不会被执行
+扩展和混入很像
 
+===================修改插值的表达式    =======================
+delimiters:['${','}']
+<p>${num}</p>
 
-
-
+插值与旧系统有冲突的时候，可以使用这个修改插值标签
 
