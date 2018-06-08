@@ -56,6 +56,58 @@ var newList = [
 reverNews:function(){
                     return this.newList.reverse();
                 }
+===================methods=======================
+<p>{{num}}</p>
+        <p><button @click="add">add</button></p>
+
+var vm = new Vue({
+            el:'#app',
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++;
+                }
+            }
+        })
+
+传值
+<p><button @click="add(2)">add</button></p>
+methods:{
+                add:function(a){
+                    if(a != ''){
+                        this.num += a;
+                    }else{
+                        this.num++;
+                    }
+                    
+                }
+            }
+传递点击事件对象，实现交互性比较高的场景
+add:function(a,event){
+                    if(a != ''){
+                        this.num += a;
+                    }else{
+                        this.num++;
+                    }
+                    console.log(event);
+                }
+
+
+自定义组件，使用native调用标签方法
+<p><btn @click.native="add(5)"></btn></p>
+var btn={
+            template:`<button>组件btn——add</button>`
+        }
+components:{
+                'btn':btn
+            },
+
+作用域外面使用原始的onclick方法调用构造器内方法
+<button onclick="vm.add(7)">add</button>
+
+
 
 
 
